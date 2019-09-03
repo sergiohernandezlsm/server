@@ -321,3 +321,5 @@ require get_template_directory() . '/inc/template-tags.php';
  * Customizer additions.
  */
 require get_template_directory() . '/inc/customizer.php';
+
+add_filter( 'use_block_editor_for_post', '__return_false' );
