@@ -1,0 +1,37 @@
+version: '3'
+services: 
+    nginx:
+        build: 
+          dockerfile: ./nginx/Dockerfile
+          context: .
+        ports:
+            - "8090:80"
+        volumes:
+            - ./wp:/var/www/wp
+        links:
+            - phpfpm
+    phpfpm:
+        build:
+          dockerfile: ./php/Dockerfile
+          context: .
+        volumes:
+            - ./wp:/var/www/wp
+        environment:
+        - DB_NAME=local_server
+        - DB_USER=root
+        - DB_PASSWORD=password123
+        - DB_HOST=db
+    db:
+        build: ./mysql/
+        volumes:
+            - ./mysql/db:/var/lib/mysql
+            - ./mysql:/init
+        ports:
+            - "3308:3306"
+        command: --init-file /init/setup.sql
+        environment:
+            - MYSQL_ROOT_PASSWORD=password123
+            - MYSQL_USER=username
+            - MYSQL_PASSWORD=password
+
+
