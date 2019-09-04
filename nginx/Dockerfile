@@ -3,7 +3,7 @@
 FROM nginx:stable
 
 COPY nginx/conf.d /etc/nginx/conf.d
-COPY wp /var/www/wp
+COPY wp /var/www/app/admin
 
 CMD ["nginx", "-g", "daemon off;"]
 

@@ -7,7 +7,7 @@ services:
         ports:
             - "8090:80"
         volumes:
-            - ./wp:/var/www/wp
+            - ./app/admin:/var/www/app/admin
         links:
             - phpfpm
     phpfpm:
@@ -15,7 +15,7 @@ services:
           dockerfile: ./php/Dockerfile
           context: .
         volumes:
-            - ./wp:/var/www/wp
+            - ./app/admin:/var/www/app/admin
         environment:
         - DB_NAME=local_server
         - DB_USER=root
